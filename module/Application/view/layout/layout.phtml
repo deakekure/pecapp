@@ -1,0 +1,80 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->translate('Pecapp Aceh'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/highcharts.js')
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js'); 
+        ?>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('report') ?>"><?php echo $this->translate('Pecapp') ?></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="<?php echo $this->url('report') ?>"><?php echo $this->translate('Beranda') ?></a></li>
+                        <li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo $this->url('report/filter') ?>"><?php echo $this->translate('Filter') ?></a></li>
+								<li><a href="<?php echo $this->url('report/template') ?>"><?php echo $this->translate('Template') ?></a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Data <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo $this->url('income') ?>"><?php echo $this->translate('Income') ?></a></li>
+								<li><a href="<?php echo $this->url('expenditure') ?>"><?php echo $this->translate('Expenditure') ?></a></li>
+							</ul>
+						</li>
+                    </ul>
+                    <?php if(!$this->identity()) : ?>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a></li>
+					</ul>
+					<?php else :?>
+					<ul class="nav navbar-nav navbar-right">
+						<li><p class="navbar-text">Selamat datang, <strong><?php echo $this->identity()->getFullname()?></strong></p></li>
+                        <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+					</ul>
+					<?php endif;?>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; <?php echo date('Y') ?> by Deakekure Creative. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

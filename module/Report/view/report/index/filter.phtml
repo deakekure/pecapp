@@ -1,0 +1,133 @@
+<?php 
+use Zend\Form\Form;
+use Zend\Form\Element;
+	
+$this->headTitle('Filter');
+	
+/* @var $filterForm Form */  
+$filterForm = $this->filterForm;
+$filterForm->prepare();
+echo $this->form()->openTag($filterForm);
+?>
+	<div class="page-header">
+		<h1>Filter Laporan</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th style="width: 25px;"><input type="checkbox" value="" /></th>
+								<th>Wilayah</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($filterForm->get('parameter')->get('territorySelections')->getIterator() as $territorySelectionFieldset) : ?>
+							<tr>
+								<td><?php echo $this->formCheckbox($territorySelectionFieldset->get('selection'))?></td>
+								<td><?php echo $territorySelectionFieldset->get('territory')->getValue()?></td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th style="width: 25px;"><input type="checkbox" value="" /></th>
+								<th>Tahun Anggaran</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($filterForm->get('parameter')->get('annualPeriodSelections')->getIterator() as $annualPeriodSelectionFieldset) : ?>
+							<tr>
+								<td><?php echo $this->formCheckbox($annualPeriodSelectionFieldset->get('selection'))?></td>
+								<td><?php echo $annualPeriodSelectionFieldset->get('annualPeriod')->getValue()?></td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th style="width: 25px;"><input type="checkbox" value=""></th>
+								<th>Fungsi Pengeluaran</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($filterForm->get('parameter')->get('domainSelections')->getIterator() as $domainSelectionFieldset) : ?>
+							<tr>
+								<td><?php echo $this->formCheckbox($domainSelectionFieldset->get('selection'))?></td>
+								<td><?php echo $domainSelectionFieldset->get('domain')->getValue()->getName()?></td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th style="width: 25px;"><input type="checkbox" value="" /></th>
+								<th>Jenis Belanja</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($filterForm->get('parameter')->get('categorySelections')->getIterator() as $categorySelectionFieldset) : ?>
+							<tr>
+								<td><?php echo $this->formCheckbox($categorySelectionFieldset->get('selection'))?></td>
+								<td><?php echo $categorySelectionFieldset->get('category')->getValue()->getDescription()?></td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th style="width: 25px;"><input type="checkbox" value=""></th>
+								<th>Sumber Penerimaan</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($filterForm->get('parameter')->get('sourceSelections')->getIterator() as $sourceSelectionFieldset) : ?>
+							<tr>
+								<td><?php echo $this->formCheckbox($sourceSelectionFieldset->get('selection'))?></td>
+								<td><?php echo $sourceSelectionFieldset->get('source')->getValue()->getDescription()?></td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="form-group">
+			<?php echo $this->formElement($filterForm->get('submit')) ?>
+			<?php echo $this->formElement($filterForm->get('reset')) ?>
+		</div>
+	</div>
+<?php 
+echo $this->form()->closeTag();
+?>
